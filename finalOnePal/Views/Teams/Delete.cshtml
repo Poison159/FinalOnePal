@@ -1,0 +1,112 @@
+﻿@model finalOnePal.Models.Team
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Team</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.kasi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.kasi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gamesPlayed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gamesPlayed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gamesWon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gamesWon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gamesDrawn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gamesDrawn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gamesLost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gamesLost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.points)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.points)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.goalDiff)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.goalDiff)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.goalsFor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.goalsFor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.goalsAgainst)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.goalsAgainst)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imgPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imgPath)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

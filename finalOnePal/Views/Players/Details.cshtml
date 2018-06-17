@@ -1,0 +1,103 @@
+﻿@model finalOnePal.Models.Player
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<h2 class="text-center label-info" style="font-family:Cooper; border-radius:5px">@Model.name</h2>
+<div class="row">
+    <div class="col-md-4">
+        <div>
+            <h3 style="font-family:'Segoe Print'"> player stats</h3>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    team name
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.team.name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.age)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.age)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.goals)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.goals)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.assists)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.assists)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.cleanSheets)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.cleanSheets)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.position)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.position)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.gamesPlayed)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.gamesPlayed)
+                </dd>
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            <button id="viewButt" class="viewButt btn-primary">View Description</button> |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+    <div class="col-md-4">
+        <img src="@Url.Content(Model.imgPath)" style="height:300px; width:250px; border-radius:50px;" />
+    </div>
+    <div id="Details" class="col-md-4" style="display:none">
+        <h3 style="font-family:'Segoe Print'">@Model.name's description</h3>
+        <hr />
+        <p style="font-family:'Segoe Print'"> Player's description<p>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $('#viewButt').on('click', function () {
+            $('#Details').fadeIn(1000);
+        });
+    </script>
+}

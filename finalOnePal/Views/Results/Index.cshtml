@@ -1,0 +1,63 @@
+﻿@model IEnumerable<finalOnePal.Models.Result>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fixture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.homeTeam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.awayTeam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.homeGoals)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.awayaGoals)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fixture)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.homeTeam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.awayTeam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.homeGoals)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.awayaGoals)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

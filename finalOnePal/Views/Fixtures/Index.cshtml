@@ -1,0 +1,39 @@
+﻿@model IEnumerable<finalOnePal.Models.Fixture>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2 class="text-center label-info" style="font-family:Cooper; border-radius:5px;">League fixtures </h2>
+
+<div>
+    @foreach (var item in Model.OrderByDescending(x => x.date))
+    {
+        <div class="text-center text-info">
+            
+            <h2> @item.date.Date</h2>
+            <h3>@Html.DisplayFor(modelItem => item.pitch)</h3>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-4 label-info" style="border-radius:10px;">
+                <h3>@Html.DisplayFor(modelItem => item.homeTeam)</h3>
+            </div>
+            <div class="col-md-4">
+                <h1 class="text-center" style="font-family:'Segoe Script'">VS</h1>
+            </div>
+            <div class="col-md-4 label-info" style="border-radius:10px;">
+                <h3>@Html.DisplayFor(modelItem => item.awayTeam)</h3>
+            </div>
+        </div>
+        <hr />
+    }
+
+</div>
+
+<style>
+    h1 {
+        border-radius:10px;
+    }
+
+</style>
