@@ -20,6 +20,8 @@ namespace finalOnePal.Models
         [Required]
         public int awayaGoals { get; set; }
         [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime date { get; set; }
         public List<Player> scorers { get; set; }
 

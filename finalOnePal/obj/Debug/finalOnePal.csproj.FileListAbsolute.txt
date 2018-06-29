@@ -66,3 +66,4 @@ c:\users\siya\documents\visual studio 2015\Projects\finalOnePal\finalOnePal\bin\
 c:\users\siya\documents\visual studio 2015\Projects\finalOnePal\finalOnePal\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 c:\users\siya\documents\visual studio 2015\Projects\finalOnePal\finalOnePal\obj\Debug\finalOnePal.dll
 c:\users\siya\documents\visual studio 2015\Projects\finalOnePal\finalOnePal\obj\Debug\finalOnePal.pdb
+C:\Users\Siya\Documents\Visual Studio 2015\Projects\finalOnePal\finalOnePal\obj\Debug\finalOnePal.csprojResolveAssemblyReference.cache

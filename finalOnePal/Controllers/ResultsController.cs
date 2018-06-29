@@ -15,6 +15,7 @@ namespace finalOnePal.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Results
+        //TODO: use jquery to dynamically show home and awway team names when dropdownlist selected
         public ActionResult Index()
         {
             return View(db.Results.ToList());
@@ -38,6 +39,8 @@ namespace finalOnePal.Controllers
         // GET: Results/Create
         public ActionResult Create()
         {
+            var fixtures = Helper.getFixturesString(db.Fixtures.ToList());
+            ViewBag.fixtures = new SelectList(fixtures);
             return View();
         }
 
@@ -50,6 +53,7 @@ namespace finalOnePal.Controllers
         {
             if (ModelState.IsValid)
             {
+                Helper.assignStats(result, db.Teams.ToList());
                 db.Results.Add(result);
                 db.SaveChanges();
                 return RedirectToAction("Index");

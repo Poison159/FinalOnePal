@@ -24,6 +24,7 @@ namespace OnepalV2.Controllers
                               select gmq.kasi;
             kasiList.AddRange(kasiquery.Distinct());
             
+            
             ViewBag.kasi = new SelectList(kasiList);
             var teams = from cr in db.Teams select cr;
             if (!string.IsNullOrEmpty(searchName))
@@ -40,6 +41,7 @@ namespace OnepalV2.Controllers
                 team.getPoints();
                 team.goalDiff = Helper.getGoalDiff(team.goalsFor, team.goalsAgainst);
             }
+            Helper.AssignGroups(db.Teams.ToList());
             db.SaveChanges();
             teams = teams.OrderByDescending(x => x.points);
             return View(teams);
@@ -206,6 +208,13 @@ namespace OnepalV2.Controllers
             db.Teams.Remove(team);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Tournament()
+        {
+            var teams = db.Teams.ToList();
+            ViewBag.Groups = Helper.getGroups();
+            return View(teams);
         }
 
         protected override void Dispose(bool disposing)

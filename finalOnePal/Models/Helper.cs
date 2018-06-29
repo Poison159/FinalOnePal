@@ -45,7 +45,7 @@ namespace finalOnePal.Models
             return obj;
         }
 
-        internal static List<string> getFixtures(List<Fixture> list)
+        internal static List<string> getFixturesString(List<Fixture> list)
         {
             List<string> fixtureList = new List<string>();
             if (list != null) {
@@ -76,6 +76,85 @@ namespace finalOnePal.Models
                 teamNames.Add(team.name);
             }
             return teamNames;
+        }
+        public static void AssignGroups(List<Team> teams)
+        {
+            List<string> groups = getGroups();
+            IEnumerable<int> teamIdList = getIdList(teams);
+            Random rand = new Random();
+            var result = teamIdList.OrderBy(x => rand.Next()).ToArray();
+            int j = 0;
+            foreach (var group in groups)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    teams.First(x => x.id == result[j]).group = group;
+                    j++;
+                }
+            }
+        }
+        public static List<string> getGroups()
+        {
+            return new List<string> { "A", "B", "C", "D", "E" };
+        }
+
+        private static IEnumerable<int> getIdList(List<Team> teams)
+        {
+            foreach (var team in teams)
+            {
+                yield return team.id;
+            }
+        }
+
+        public static void assignStats(Result result, List<Team> teams)  
+        {
+            var teamInFixture = Helper.findTeams(result,teams);
+            var homeTeam = teamInFixture.ElementAt(0);
+            var awayTeam = teamInFixture.ElementAt(1);
+
+            homeTeam.gamesPlayed++;
+            homeTeam.goalsFor += result.homeGoals;
+            homeTeam.goalsAgainst += result.awayaGoals;
+
+            awayTeam.gamesPlayed++;
+            awayTeam.goalsFor += result.awayaGoals;
+            awayTeam.goalsAgainst += result.homeGoals;
+
+            Helper.PopilateGamesWon(homeTeam, awayTeam,result);
+
+        }
+
+        private static void PopilateGamesWon(Team homeTeam, Team awayTeam, Result result)
+        {
+            if (result.homeGoals > result.awayaGoals)
+            {
+                homeTeam.gamesWon++;
+                homeTeam.points += 3;
+                awayTeam.gamesLost++;
+            }
+            else if (result.homeGoals < result.awayaGoals)
+            {
+                awayTeam.gamesWon++;
+                awayTeam.points += 3;
+                homeTeam.gamesLost++;
+            }
+            else {
+                homeTeam.gamesDrawn++;
+                awayTeam.gamesDrawn++;
+                homeTeam.points++;
+                awayTeam.points++;
+            }
+        }
+
+        private static List<Team> findTeams(Result result, List<Team> teams)
+        {
+            List<Team> teamsInFixture = new List<Team>();
+            var awayTeam = teams.First(x => x.name == result.awayTeam);
+            var homeTeam = teams.First(x => x.name == result.homeTeam);
+
+            teamsInFixture.Add(homeTeam);
+            teamsInFixture.Add(awayTeam);
+            return teamsInFixture;
         }
     }
 }
