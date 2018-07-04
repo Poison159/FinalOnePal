@@ -40,8 +40,9 @@ namespace finalOnePal.Controllers
         public ActionResult Create()
         {
             var fixtures = Helper.getFixturesString(db.Fixtures.ToList());
-            ViewBag.fixtures = new SelectList(fixtures);
-            return View();
+            Result result = new Result();
+            ViewBag.fixture = new SelectList(fixtures);
+            return View(result);
         }
 
         // POST: Results/Create
@@ -49,8 +50,11 @@ namespace finalOnePal.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,fixture,homeTeam,awayTeam,homeGoals,awayaGoals,date")] Result result)
+        public ActionResult Create([Bind(Include = "id,fixture,homeGoals,awayaGoals")] Result result)
         {
+            var fixture = Helper.findFixture(result.fixture, db.Fixtures.ToList());
+            result.fix = fixture;
+            result.fixId = fixture.id;
             if (ModelState.IsValid)
             {
                 Helper.assignStats(result, db.Teams.ToList());
@@ -58,7 +62,8 @@ namespace finalOnePal.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            var fixtures = Helper.getFixturesString(db.Fixtures.ToList());
+            ViewBag.fixtures = new SelectList(fixtures,result.fixId);
             return View(result);
         }
 

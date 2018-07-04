@@ -149,12 +149,41 @@ namespace finalOnePal.Models
         private static List<Team> findTeams(Result result, List<Team> teams)
         {
             List<Team> teamsInFixture = new List<Team>();
-            var awayTeam = teams.First(x => x.name == result.awayTeam);
-            var homeTeam = teams.First(x => x.name == result.homeTeam);
+            Team awayTeam = getTeam(result.fix.awayTeam, teams);
+            Team homeTeam = getTeam(result.fix.homeTeam, teams);
 
             teamsInFixture.Add(homeTeam);
             teamsInFixture.Add(awayTeam);
             return teamsInFixture;
+        }
+
+        private static Team getTeam(string teamName, List<Team> teams)
+        {
+            var team = new Team();
+            foreach (var item in teams)
+            {
+                if (item.name == teamName)
+                {
+                    team = item;
+                    break;
+                }
+            }
+            return team;
+        }
+
+        public static Fixture findFixture(string fitureName,List<Fixture> fixtures)
+        {
+            var fixture = new Fixture();
+            var array = fitureName.Split(',');
+            foreach (var item in fixtures)
+            {
+                if (item.homeTeam == array[0] && item.awayTeam == array[1])
+                {
+                    fixture = item;
+                    break;
+                }
+            }
+            return fixture;
         }
     }
 }
